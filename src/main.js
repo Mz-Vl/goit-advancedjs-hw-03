@@ -1,4 +1,3 @@
-// src/main.js
 import iziToast from 'izitoast';
 import { fetchBreeds, fetchCatByBreed } from './js/cat-api.js';
 
@@ -42,6 +41,10 @@ const handleBreedSelectChange = async (event) => {
     hideError();
     hideCatInfo();
     const catData = await fetchCatByBreed(breedId);
+    if (!catData) {
+      showError('No cat was found for your request');
+      return;
+    }
     displayCatInfo(catData);
   } catch (error) {
     showError(error.message);
